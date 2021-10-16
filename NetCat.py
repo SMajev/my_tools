@@ -113,7 +113,8 @@ def server_loop():
     while True:
         client_socket, addr = server.accept()
 
-        client_thread
+        client_thread = threading.Thread(target=client_handler, args=(client_socket,))
+        client_thread.start()
 
 
 
