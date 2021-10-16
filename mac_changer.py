@@ -9,11 +9,10 @@ parser.add_option('-i', '--interface', dest='interface',
 parser.add_option('-m', '--mac', dest='MAC',
                  help='New MAC address example (00:11:22:33:44:66): ')
 
+(options, arguments) = parser.parse_args()
 
-parser.parse_args()
-
-interface = input('Interface: ')
-MAC = input('MAC address example(00:11:22:33:44:66): ')
+interface = options.interface
+MAC = options.MAC
 
 print(f'[*] Changing MAC address for {interface} to {MAC}')
 
