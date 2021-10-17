@@ -26,7 +26,7 @@ def change_mac(interface, MAC):
 
 def check_mac(interface):
     check = subprocess.check_output(['ifconfig', interface])
-    return check
+    return check.decode('utf-8')
 
 
 if __name__ == '__main__':
