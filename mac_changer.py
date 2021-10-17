@@ -25,8 +25,10 @@ def change_mac(interface, MAC):
     subprocess.call(['sudo', "ifconfig", interface, 'up'])
 
 
-options = get_args()
 
-if __name__ == '__main__': change_mac(options.interface, options.MAC)
+
+if __name__ == '__main__':
+    options = get_args()
+    change_mac(options.interface, options.MAC)
 
 
