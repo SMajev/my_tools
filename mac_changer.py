@@ -1,5 +1,6 @@
 import subprocess
 import optparse
+import re
 
 def get_args():
     parser = optparse.OptionParser()
@@ -26,12 +27,18 @@ def change_mac(interface, MAC):
 
 def check_mac(interface):
     check = subprocess.check_output(['ifconfig', interface])
-    return check.decode('utf-8')
+    return check_reg(check.decode('utf-8'))
 
+def check_reg(str):
+    mac_address_search = re.search(r'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', str)
+    if mac_address_search:
+        return f'MAC: {mac_address_search.group(0)}'
 
-if __name__ == '__main__':
+def main():
     options = get_args()
     change_mac(options.interface, options.MAC)
     print(check_mac(options.interface))
+
+if __name__ == '__main__': main()
 
 
