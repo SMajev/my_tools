@@ -12,10 +12,10 @@ def get_args():
 
     (options, arguments) = parser.parse_args()
     if not options.interface:
-        parser.error('Please specify interface')
+        parser.error('[-] Please specify interface')
     elif not options.MAC:
-        parser.error('Please specify MAC')
-    return options.interface, options.MAC
+        parser.error('[-] Please specify MAC')
+    return options
     
 
 def change_mac(interface, new_mac):
@@ -25,8 +25,8 @@ def change_mac(interface, new_mac):
     subprocess.call(['sudo', "ifconfig", interface, 'up'])
 
 
-INTERFACE, MAC = get_args()
+options = get_args()
 
-if __name__ == '__main__': change_mac(INTERFACE, MAC)
+if __name__ == '__main__': change_mac(options.interface, options.MAC)
 
 
