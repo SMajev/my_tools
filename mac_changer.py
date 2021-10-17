@@ -18,7 +18,7 @@ def get_args():
     return options
     
 
-def change_mac(interface, new_mac):
+def change_mac(interface, MAC):
     print(f'[*] Changing MAC address for {interface} to {MAC}')
     subprocess.call(['sudo', "ifconfig", interface, 'down'])
     subprocess.call(['sudo', "ifconfig", interface, 'hw', 'ether', MAC])
