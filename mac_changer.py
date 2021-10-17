@@ -11,8 +11,12 @@ def get_args():
                     help='New MAC address example (00:11:22:33:44:66): ')
 
     (options, arguments) = parser.parse_args()
-
+    if not options.interface:
+        parser.error('Please specify interface')
+    elif not options.MAC:
+        parser.error('Please specify MAC')
     return options.interface, options.MAC
+    
 
 def change_mac(interface, new_mac):
     print(f'[*] Changing MAC address for {interface} to {MAC}')
