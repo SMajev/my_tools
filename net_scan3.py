@@ -9,7 +9,8 @@ def scan(ip):
     answered_lst = scapy.srp(arp_request_broadcast, timeout=1)[0]
     
     for element in answered_lst:
-        print(element, '\n')
+        print(element)
+        print('--------------------------------------------------------------------------------------------------')
 
 
 if __name__ == '__main__': scan(IP)
