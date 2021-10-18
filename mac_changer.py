@@ -24,20 +24,28 @@ def change_mac(interface, MAC):
     subprocess.call(['sudo', "ifconfig", interface, 'down'])
     subprocess.call(['sudo', "ifconfig", interface, 'hw', 'ether', MAC])
     subprocess.call(['sudo', "ifconfig", interface, 'up'])
+    return MAC
 
 def get_mac(interface):
     ifconfig_result = subprocess.check_output(['ifconfig', interface]).decode('utf-8')
     mac_address_search = re.search(r'\w\w:\w\w:\w\w:\w\w:\w\w:\w\w', ifconfig_result)
     if mac_address_search:
-        print(ifconfig_result)
-        return f'Current MAC: {mac_address_search.group(0)}'
+        return f'[*] Current MAC: {mac_address_search.group(0)}'
     else:
         return '[-] Could not read MAC address.'
 
 def main():
     options = get_args()
-    change_mac(options.interface, options.MAC)
-    print(get_mac(options.interface))
+    current_mac = get_mac(options.interface)
+    print(f'[*] Current MAC: {current_mac}')
+    current_mac = change_mac(options.interface, options.MAC)
+
+
+
+    if current_mac == options.MAC:
+        print(f'[+] MAC address was change to {current_mac}')
+    else:
+        print('[-] MAC address did not get changed.')
 
 if __name__ == '__main__': main()
 
